@@ -1,0 +1,38 @@
+<template>
+  <div>
+    <h2 class="govuk-heading-l">
+      <v-icon v-if="hasIcon" :name="icon" scale="2"/>
+      {{title}}
+    </h2>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'VHeadline',
+  props: {
+    /**
+     * the title
+     * @type {String}
+     * @default null
+     */
+    title: String,
+    /**
+     * font awesome icon name
+     * @type {String}
+     * @default null
+     */
+    icon: String
+  },
+  computed: {
+    hasIcon () {
+      return this.icon != null
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+
+</style>
