@@ -1,28 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header class="govuk-header " role="banner" data-module="header">
+  <div class="govuk-header__container govuk-width-container">
+
+    <div class="govuk-header__logo">
+      <a href="#" class="govuk-header__link govuk-header__link--homepage">
+        <span class="govuk-header__logotype">
+          <span class="govuk-header__logotype-text">
+            Spar Nord Fonden
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+  <div class="govuk-width-container">
+    <application-form/>
+  </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import ApplicationForm from '@/views/ApplicationForm'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    ApplicationForm
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import "node_modules/govuk-frontend/all";
+
+body {
+  margin: 0;
+  padding: 0;
 }
 </style>
