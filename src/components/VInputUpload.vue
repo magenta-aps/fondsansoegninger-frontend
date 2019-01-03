@@ -9,7 +9,15 @@
     <span v-show="errors.has(identifier)" class="govuk-error-message">
       {{ errors.first(identifier) }}
     </span>
-    <input class="govuk-file-upload" :id="identifier" :name="identifier" type="file" accept="application/pdf">
+    <input
+      class="govuk-file-upload"
+      :id="identifier"
+      :name="identifier"
+      type="file"
+      accept="application/pdf"
+      v-validate="validate"
+      :data-vv-as="label"
+    >
   </div>
 </template>
 

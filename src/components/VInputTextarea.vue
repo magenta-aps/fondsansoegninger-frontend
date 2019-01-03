@@ -10,7 +10,16 @@
       <span v-show="errors.has(identifier)" class="govuk-error-message">
         {{ errors.first(identifier) }}
       </span>
-      <textarea class="govuk-textarea" v-model="content" :id="identifier" :name="identifier" rows="5" v-validate="validate"></textarea>
+      <textarea
+        class="govuk-textarea"
+        v-model="content"
+        :id="identifier"
+        :name="identifier"
+        rows="5"
+        v-validate="validate"
+        :data-vv-as="label"
+      >
+      </textarea>
     </div>
     <span class="govuk-hint govuk-character-count__message">
       Du har {{maxWordCount - wordCount}} ord tilbage.

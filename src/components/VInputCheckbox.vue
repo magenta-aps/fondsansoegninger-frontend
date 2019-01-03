@@ -12,7 +12,15 @@
       </span>
       <div class="govuk-checkboxes">
         <div class="govuk-checkboxes__item">
-          <input class="govuk-checkboxes__input" :id="identifier" :name="identifier" type="checkbox" value="x" v-validate="validate">
+          <input
+            class="govuk-checkboxes__input"
+            :id="identifier"
+            :name="identifier"
+            type="checkbox"
+            value="x"
+            v-validate="validate"
+            :data-vv-as="label"
+          >
           <label class="govuk-label govuk-checkboxes__label">
             {{description}}
           </label>

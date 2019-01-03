@@ -7,6 +7,7 @@
       <v-input-text label="Adresse" validate="required"/>
       <v-input-text label="Post nr." validate="required|digits:4" size="4"/>
       <v-input-text label="By" validate="required"/>
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
       <v-headline title="Kontaktperson" icon="user"/>
       <v-input-text label="Fornavn" validate="required"/>
@@ -17,7 +18,7 @@
 
       <v-headline title="Projektet" icon="home"/>
       <v-input-text label="Projekttitel" hint="Skriv en kortfattet projekttitel." validate="required|max:250"/>
-      <v-input-textarea label="Kort projektbeskrivelse" hint="en kort beskrivelse af projektet der uddyber projekttitlen." validate="required|max:1000"/>
+      <v-input-textarea label="Kort projektbeskrivelse" hint="en kort beskrivelse af projektet der uddyber projekttitlen." validate="required|word_limit:500"/>
       <v-input-upload label="Vedhæft uddybende projektbeskrivelse" hint="Upload projektbeskrivelsen som pdf." validate="required|size:2048"/>
       <v-input-radio label="Kategori" hint="Vælg det område, der bedst dækker projektets formål." :options="radioOptions" validate="required"/>
       <v-input-date label="Forventet projektstart" validate="required"/>
