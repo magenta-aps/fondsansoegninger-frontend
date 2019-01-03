@@ -2,7 +2,7 @@
   <div class="govuk-!-padding-top-6">
     <form @submit.stop.prevent="submitForm">
       <v-headline title="Ansøger" icon="user"/>
-      <v-input-text label="CVR" validate="required|digits:8" size="8"/>
+      <v-input-text label="CVR" validate="required|digits:8|cvr" size="8"/>
       <v-input-text label="Forening/organisations navn" validate="required"/>
       <v-input-text label="Adresse" validate="required"/>
       <v-input-text label="Post nr." validate="required|digits:4" size="4"/>
@@ -23,22 +23,27 @@
       <v-input-radio label="Kategori" hint="Vælg det område, der bedst dækker projektets formål." :options="radioOptions" validate="required"/>
       <v-input-date label="Forventet projektstart" validate="required"/>
       <v-input-date label="Forventet projektslut" validate="required"/>
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+
+      <v-headline title="Budget" icon="dollar-sign"/>
       <v-input-text label="Ansøgt beløb" validate="required|numeric|decimals:2"/>
+      <v-input-upload label="Budget" validate="required|size:2048"/>
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
       <v-headline title="Dokumenter" icon="paperclip"/>
       <div class="govuk-inset-text">
         Alle filer skal være pdfer
       </div>
-      <v-input-upload label="Budget" validate="required|size:2048"/>
-      <v-input-upload label="Bestyrelsessammensætning" validate="required|size:2048"/>
       <v-input-upload label="Vedtægter" validate="required|size:2048"/>
-      <v-input-upload label="Regnskab" validate="required|size:2048"/>
+      <v-input-upload label="Bestyrelsessammensætning" validate="size:2048"/>
+      <v-input-upload label="Regnskab" validate="size:2048"/>
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
       <v-headline title="Bankoplysninger" icon="university"/>
+      <v-input-text label="Pengeinstituttets navn" validate="required"/>
       <v-input-text label="Reg nr." validate="required|max:4" size="4"/>
       <v-input-text label="Konto nr." validate="required|max:8" size="10"/>
+      <v-input-upload label="Dokumentation for ejerskab af bankkontoen" validate="required|size:2048"/>
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
       <v-headline title="Yderligere oplysninger og godkendelse" icon="file-alt"/>
