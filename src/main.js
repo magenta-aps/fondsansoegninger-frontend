@@ -5,6 +5,7 @@ import VeeValidate, { Validator } from 'vee-validate'
 import messagesDA from 'vee-validate/dist/locale/da'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons'
+import WordLimit from './validators/WordLimit'
 
 Vue.config.productionTip = false
 
@@ -16,6 +17,7 @@ const veeConfig = {
 }
 
 Validator.localize('da', messagesDA)
+Validator.extend('word_limit', WordLimit)
 Vue.use(VeeValidate, veeConfig)
 Vue.component('v-icon', Icon)
 
