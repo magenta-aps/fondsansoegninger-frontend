@@ -17,8 +17,8 @@ $govuk-colours: (
   "bright-purple": #912b88,
   "pink": #d53880,
   "light-pink": #f499be,
-  "red": #b10e1e,
-  "bright-red": #df3034,
+  "red": #bc2b30, //modified
+  "bright-red": #e4003f, //modified
   "orange": #f47738,
   "brown": #b58840,
   "yellow": #ffbf47,
@@ -26,12 +26,20 @@ $govuk-colours: (
   "green": #006435,
   "turquoise": #28a197,
   "light-blue": #2b8cc4,
-  "blue": #005ea5,
+  "blue": #023671, //modified
+  
+  "mole-1": #746661,
+  "mole-2": #5e514d,
+  "mole-3": #382f2d,
 
-  "black": #0b0c0c,
-  "grey-1": #6f777b,
-  "grey-2": #bfc1c3,
-  "grey-3": #dee0e2,
-  "grey-4": #f8f8f8,
+  "black": #393634, //modified
+  // "grey-1": #6f777b,
+  // "grey-2": #bfc1c3,
+  // "grey-3": #dee0e2,
+  // "grey-4": #f8f8f8,
+  "grey-1": #796e65,
+  "grey-2": #968c83,
+  "grey-3": #b6ada5,
+  "grey-4": #d7d2cb,
   "white": #ffffff
 ) !default;

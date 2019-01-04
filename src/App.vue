@@ -1,20 +1,19 @@
 <template>
-  <div id="app">
+  <div id="app" class="govuk-template__body">
     <header class="govuk-header " role="banner" data-module="header">
   <div class="govuk-header__container govuk-width-container">
 
     <div class="govuk-header__logo">
       <a href="#" class="govuk-header__link govuk-header__link--homepage">
         <span class="govuk-header__logotype">
-          <span class="govuk-header__logotype-text">
-            Spar Nord Fonden
-          </span>
+          <img src="./assets/logo.svg" onerror="this.src='./assets/logo-fallback.png'">
         </span>
       </a>
     </div>
   </div>
 </header>
   <div class="govuk-width-container">
+    <h1 class="govuk-heading-xl govuk-!-padding-top-9">Ansøgning til Spar Nord Fonden</h1>
     <application-form/>
   </div>
   </div>
@@ -35,5 +34,13 @@ export default {
 body {
   margin: 0;
   padding: 0;
+}
+
+.govuk-header {
+  background: transparent !important;
+}
+
+.govuk-header__logotype img {
+  width: 260px;
 }
 </style>
