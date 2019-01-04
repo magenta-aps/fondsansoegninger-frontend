@@ -1,51 +1,76 @@
 <template>
-  <div class="govuk-!-padding-top-6">
+  <div class="govuk-!-padding-top-2">
     <form @submit.stop.prevent="submitForm">
-      <v-headline title="Ansøger" icon="user"/>
-      <v-input-text label="CVR" validate="required|digits:8" size="8"/>
-      <v-input-text label="Forening/organisations navn" validate="required"/>
-      <v-input-text label="Adresse" validate="required"/>
-      <v-input-text label="Post nr." validate="required|digits:4" size="4"/>
-      <v-input-text label="By" validate="required"/>
+      <v-headline :title="$t('applicant')" icon="user"/>
+      <v-input-text :label="$t('cvr_no')" validate="required|digits:8|cvr" size="8"/>
+      <v-input-text :label="$t('organisation_name')" :hint="$t('organisation_name_hint')" validate="required"/>
+      <v-input-text :label="$t('address')" validate="required"/>
 
-      <v-headline title="Kontaktperson" icon="user"/>
-      <v-input-text label="Fornavn" validate="required"/>
-      <v-input-text label="Efternavn" validate="required"/>
-      <v-input-text label="Email" validate="required|email"/>
-      <v-input-text label="Telefon" validate="required|digits:8" size="10"/>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
-
-      <v-headline title="Projektet" icon="home"/>
-      <v-input-text label="Projekttitel" hint="Skriv en kortfattet projekttitel." validate="required|max:250"/>
-      <v-input-textarea label="Kort projektbeskrivelse" hint="en kort beskrivelse af projektet der uddyber projekttitlen." validate="required|max:1000"/>
-      <v-input-upload label="Vedhæft uddybende projektbeskrivelse" hint="Upload projektbeskrivelsen som pdf." validate="required|size:2048"/>
-      <v-input-radio label="Kategori" hint="Vælg det område, der bedst dækker projektets formål." :options="radioOptions" validate="required"/>
-      <v-input-date label="Forventet projektstart" validate="required"/>
-      <v-input-date label="Forventet projektslut" validate="required"/>
-      <v-input-text label="Ansøgt beløb" validate="required|numeric|decimals:2"/>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
-
-      <v-headline title="Dokumenter" icon="paperclip"/>
-      <div class="govuk-inset-text">
-        Alle filer skal være pdfer
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <v-input-text :label="$t('zip_code')" validate="required|digits:4"/>
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+          <v-input-text :label="$t('city')" validate="required"/>
+        </div>
       </div>
-      <v-input-upload label="Budget" validate="required|size:2048"/>
-      <v-input-upload label="Bestyrelsessammensætning" validate="required|size:2048"/>
-      <v-input-upload label="Vedtægter" validate="required|size:2048"/>
-      <v-input-upload label="Regnskab" validate="required|size:2048"/>
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
-      <v-headline title="Bankoplysninger" icon="university"/>
-      <v-input-text label="Reg nr." validate="required|max:4" size="4"/>
-      <v-input-text label="Konto nr." validate="required|max:8" size="10"/>
+      <v-headline :title="$t('contact_person')" icon="user"/>
+      <v-input-text :label="$t('first_name')" :hint="$t('first_name_hint')" validate="required"/>
+      <v-input-text :label="$t('last_name')" validate="required"/>
+      <v-input-text :label="$t('email')" :hint="$t('email_hint')" validate="required|email"/>
+      <v-input-text :label="$t('phone')" :hint="$t('phone_hint')" validate="required|digits:8"/>
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
-      <v-headline title="Yderligere oplysninger og godkendelse" icon="file-alt"/>
-      <v-input-checkbox label="Samtykke" description="jeg er en samtykkeerklæring" validate="required"/>
-      <v-input-checkbox label="Privatlivspolitik" description="jeg er en privatlivspolitik" validate="required"/>
+      <v-headline :title="$t('project')" icon="home"/>
+      <v-input-text :label="$t('project_title')" :hint="$t('project_title_hint')" validate="required|max:250"/>
+      <v-input-textarea :label="$t('short_project_description')" :hint="$t('short_project_description_hint')" validate="required|word_limit:500"/>
+      <v-input-upload :label="$t('in_depth_project_description')" :hint="$t('in_depth_project_description_hint')" validate="required|size:2048"/>
+      <v-input-radio :label="$t('category')" :hint="$t('category_hint')" :options="radioOptions" validate="required"/>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <v-input-date :label="$t('expected_project_start')" validate="required"/>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <v-input-date :label="$t('expected_project_end')" validate="required"/>
+        </div>
+      </div>
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+
+      <v-headline :title="$t('budget')" icon="dollar-sign"/>
+      <v-input-text :label="$t('applied_amount')" validate="required|numeric|decimals:2"/>
+      <v-input-upload :label="$t('budget')" validate="required|size:2048"/>
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+
+      <v-headline :title="$t('documents')" icon="paperclip"/>
+      <div class="govuk-inset-text">
+        {{$t('all_files_must_be_pdf')}}
+      </div>
+      <v-input-upload :label="$t('articles_of_association')" :hint="$t('articles_of_association_hint')" validate="required|size:2048"/>
+      <v-input-upload :label="$t('board_combination')" :hint="$t('board_combination_hint')" validate="size:2048"/>
+      <v-input-upload :label="$t('accountancy')" :hint="$t('accountancy_hint')" validate="size:2048"/>
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+
+      <v-headline :title="$t('bank_info')" icon="university"/>
+      <v-input-text :label="$t('bank_name')" validate="required"/>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+          <v-input-text :label="$t('reg_no')" validate="required|max:4"/>
+        </div>
+        <div class="govuk-grid-column-two-thirds">
+          <v-input-text :label="$t('account_no')" validate="required|max:8"/>
+        </div>
+      </div>
+      <v-input-upload :label="$t('bank_account_ownership')" validate="required|size:2048"/>
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+
+      <v-headline :title="$t('more_info')" icon="file-alt"/>
+      <v-input-checkbox :label="$t('consent_declaration')" description="jeg er en samtykkeerklæring" validate="required"/>
+      <v-input-checkbox :label="$t('privacy_policy')" description="jeg er en privatlivspolitik" validate="required"/>
 
       <button type="submit" class="govuk-button govuk-button--start">
-        Send ansøgning
+        {{$t('send_application')}}
       </button>
     </form>
   </div>

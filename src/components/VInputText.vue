@@ -9,7 +9,17 @@
     <span v-show="errors.has(identifier)" class="govuk-error-message">
       {{ errors.first(identifier) }}
     </span>
-    <input class="govuk-input" :class="inputWidth" :id="identifier" :name="identifier" :data-vv-as="label" type="text" v-validate="validate">
+    <input
+      class="govuk-input"
+      :class="inputWidth"
+      :id="identifier"
+      :name="identifier"
+      :data-vv-as="label"
+      data-vv-validate-on="blur"
+      type="text"
+      v-validate="validate"
+      :maxlength="maxLength"
+    >
   </div>
 </template>
 
@@ -27,6 +37,22 @@ export default {
   computed: {
     inputWidth () {
       return this.size ? `govuk-input--width-${this.size}` : ''
+    },
+    maxLength () {
+      const keys = ['max', 'digits']
+      let count = null
+      let rules = this.validate.split('|')
+
+      for (var i = 0; i < rules.length; i++) {
+        for (var j = 0; j < keys.length; j++) {
+          if (rules[i].includes(keys[j])) {
+            count = rules[i].split(':')[1]
+            break
+          }
+        }
+        if (count != null) break
+      }
+      return count
     }
   }
 }

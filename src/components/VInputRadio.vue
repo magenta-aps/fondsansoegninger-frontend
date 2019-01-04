@@ -14,8 +14,16 @@
       </span>
       <div class="govuk-radios">
         <div class="govuk-radios__item" v-for="(option, index) in options" :key="index">
-          <input class="govuk-radios__input" id="where-do-you-live-1" name="where-do-you-live" type="radio" :value="option.uuid">
-          <label class="govuk-label govuk-radios__label" for="where-do-you-live-1">
+          <input
+            class="govuk-radios__input"
+            :id="identifier+'-'+index"
+            :name="identifier"
+            type="radio"
+            :value="option.uuid"
+            v-validate="validate"
+            :data-vv-as="label"
+          >
+          <label class="govuk-label govuk-radios__label" :for="identifier+'-'+index">
             {{option.label}}
           </label>
         </div>
