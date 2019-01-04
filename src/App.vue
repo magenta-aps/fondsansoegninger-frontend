@@ -31,8 +31,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "node_modules/govuk-frontend/all";
-
+@import "./assets/govuk-frontend/src/all.scss";
 body {
   margin: 0;
   padding: 0;
