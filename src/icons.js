@@ -1,0 +1,7 @@
+import 'vue-awesome/icons/user'
+import 'vue-awesome/icons/home'
+import 'vue-awesome/icons/dollar-sign'
+import 'vue-awesome/icons/paperclip'
+import 'vue-awesome/icons/university'
+import 'vue-awesome/icons/cloud-upload-alt'
+import 'vue-awesome/icons/file-alt'
