@@ -21,7 +21,7 @@
           accept="application/pdf"
           v-validate="validate"
           :data-vv-as="label"
-          @change="onChange"
+          @change="onChange($event)"
         />
       </div>
       <span class="govuk-body govuk-!-padding-left-2">
@@ -43,9 +43,10 @@ export default {
     }
   },
   methods: {
-    onChange () {
-      let file = this.$refs[this.identifier].value
-      this.fileName = file.replace('C:\\fakepath\\', '')
+    onChange (event) {
+      let file = event.target.files[0]
+      this.fileName = file.name
+      this.$emit('input', file)
     }
   }
 }
