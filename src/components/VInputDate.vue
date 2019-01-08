@@ -10,73 +10,41 @@
       <span v-show="errors.has(identifier)" class="govuk-error-message">
         {{ errors.first(identifier) }}
       </span>
-      <div class="govuk-date-input" :id="identifier">
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" :for="identifier + '-day'">
-              {{$t('day')}}
-            </label>
-            <input
-              class="govuk-input govuk-date-input__input govuk-input--width-2"
-              v-model="day"
-              :id="identifier + '-day'"
-              :name="identifier + '-day'"
-              type="number"
-              pattern="[0-9]*"
-            >
-          </div>
-        </div>
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" :for="identifier + '-month'">
-              {{$t('month')}}
-            </label>
-            <input
-              class="govuk-input govuk-date-input__input govuk-input--width-2"
-              v-model="month"
-              :id="identifier + '-month'"
-              :name="identifier + '-month'"
-              type="number"
-              pattern="[0-9]*"
-            >
-          </div>
-        </div>
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label class="govuk-label govuk-date-input__label" :for="identifier + '-year'">
-              {{$t('year')}}
-            </label>
-            <input
-              class="govuk-input govuk-date-input__input govuk-input--width-4"
-              v-model="year"
-              :id="identifier + '-year'"
-              :name="identifier + '-year'"
-              type="number"
-              pattern="[0-9]*"
-            >
-          </div>
-        </div>
-      </div>
+      <datepicker
+        input-class="govuk-input"
+        calendar-class="govuk-body"
+        :language="da"
+        format="dd-MM-yy"
+        monday-first
+        v-model="internalValue"
+      />
+      <input
+        v-model="internalValue"
+        v-validate="validate"
+        :name="identifier"
+        :id="identifier"
+        :data-vv-as="label"
+        type="hidden"
+      />
     </fieldset>
   </div>
 </template>
 
 <script>
 import VInputBase from './VInputBase'
+import Datepicker from 'vuejs-datepicker'
+import { da } from 'vuejs-datepicker/dist/locale'
+
 export default {
   extends: VInputBase,
   name: 'VInputDate',
+  components: {
+    Datepicker
+  },
   data () {
     return {
-      day: null,
-      month: null,
-      year: null
-    }
-  },
-  computed: {
-    date () {
-      // return 'hello world' + this.day
-      return this.day + '-' + this.month + '-' + this.year
+      da: da,
+      selected: null
     }
   }
 }
@@ -84,5 +52,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.calendar-class {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 </style>

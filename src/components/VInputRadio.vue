@@ -22,6 +22,7 @@
             :value="option.uuid"
             v-validate="validate"
             :data-vv-as="label"
+            v-model="internalValue"
           >
           <label class="govuk-label govuk-radios__label" :for="identifier+'-'+index">
             {{option.label}}

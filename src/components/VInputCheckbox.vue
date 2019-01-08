@@ -17,12 +17,12 @@
             :id="identifier"
             :name="identifier"
             type="checkbox"
-            value="x"
             v-validate="validate"
             :data-vv-as="label"
+            v-model="internalValue"
           >
           <label class="govuk-label govuk-checkboxes__label">
-            {{description}}
+            <slot></slot>
           </label>
         </div>
       </div>
@@ -34,18 +34,7 @@
 import VInputBase from './VInputBase'
 export default {
   extends: VInputBase,
-  name: 'VInputUpload',
-  props: {
-    /**
-     * Set a description next to checkbox
-     * @default null
-     * @type {String}
-     */
-    description: {
-      type: String,
-      default: null
-    }
-  }
+  name: 'VInputCheckbox'
 }
 </script>
 

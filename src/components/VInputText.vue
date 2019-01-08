@@ -19,6 +19,7 @@
       type="text"
       v-validate="validate"
       :maxlength="maxLength"
+      v-model="internalValue"
     >
   </div>
 </template>
@@ -29,6 +30,11 @@ export default {
   extends: VInputBase,
   name: 'VInputText',
   props: {
+    /**
+     * change size of input field
+     * @default null
+     * @type {String|Integer}
+     */
     size: {
       type: [Number, String],
       default: null
