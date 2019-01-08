@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <h1 class="govuk-heading-xl govuk-!-padding-top-9">Ansøgning til Spar Nord Fonden</h1>
   <div class="govuk-!-padding-top-2">
     <form @submit.stop.prevent="submitForm">
       <v-headline :title="$t('applicant')" icon="user"/>
@@ -77,6 +79,7 @@
         {{$t('send_application')}}
       </button>
     </form>
+  </div>
   </div>
 </template>
 
@@ -160,6 +163,7 @@ export default {
       Api.apply(formData)
         .then(response => {
           console.log(response)
+          this.$router.push({ name: 'thankyou' })
         })
     }
   }

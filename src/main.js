@@ -8,6 +8,7 @@ import 'vue-awesome/icons'
 import WordLimit from './validators/WordLimit'
 import Cvr from './validators/Cvr'
 import VueCurrencyFilter from 'vue-currency-filter'
+import router from './router'
 
 Vue.config.productionTip = false
 
@@ -36,5 +37,6 @@ Vue.component('v-icon', Icon)
 
 new Vue({
   i18n,
+  router,
   render: h => h(App)
 }).$mount('#app')

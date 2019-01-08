@@ -1,34 +1,27 @@
 <template>
   <div id="app" class="govuk-template__body">
     <header class="govuk-header " role="banner" data-module="header">
-  <div class="govuk-header__container govuk-width-container">
-
-    <div class="govuk-header__logo">
-      <a href="#" class="govuk-header__link govuk-header__link--homepage">
-        <span class="govuk-header__logotype">
-          <img src="./assets/logo.svg" onerror="this.src='./assets/logo-fallback.png'">
-        </span>
-      </a>
+      <div class="govuk-header__container govuk-width-container">
+        <div class="govuk-header__logo">
+          <a href="#" class="govuk-header__link govuk-header__link--homepage">
+            <span class="govuk-header__logotype">
+              <img src="./assets/logo.svg" onerror="this.src='./assets/logo-fallback.png'">
+            </span>
+          </a>
+        </div>
+      </div>
+    </header>
+    <div class="govuk-width-container">
+      <router-view/>
     </div>
-  </div>
-</header>
-  <div class="govuk-width-container">
-    <h1 class="govuk-heading-xl govuk-!-padding-top-9">Ansøgning til Spar Nord Fonden</h1>
-    <application-form/>
-  </div>
   </div>
 </template>
 
 <script>
-import ApplicationForm from '@/views/ApplicationForm'
 export default {
-  name: 'app',
-  components: {
-    ApplicationForm
-  }
+  name: 'app'
 }
 </script>
-
 <style lang="scss">
 @import "./assets/govuk-frontend/src/all.scss";
 body {
