@@ -12,7 +12,7 @@
       </span>
       <textarea
         class="govuk-textarea"
-        v-model="content"
+        v-model="internalValue"
         :id="identifier"
         :name="identifier"
         rows="5"
@@ -32,11 +32,6 @@ import VInputBase from './VInputBase'
 export default {
   extends: VInputBase,
   name: 'VInputTextarea',
-  data () {
-    return {
-      content: ''
-    }
-  },
   computed: {
     maxWordCount () {
       const wcKey = 'word_limit'
@@ -52,8 +47,11 @@ export default {
       return count
     },
     wordCount () {
-      let list = this.content.split(' ')
-      return list[list.length - 1] === '' ? list.length - 1 : list.length
+      if (this.internalValue != null) {
+        let list = this.internalValue.split(' ')
+        return list[list.length - 1] === '' ? list.length - 1 : list.length
+      }
+      return 0
     }
   }
 }

@@ -19,6 +19,7 @@
       type="text"
       v-validate="validate"
       :maxlength="maxLength"
+      v-model="internalValue"
     >
   </div>
 </template>

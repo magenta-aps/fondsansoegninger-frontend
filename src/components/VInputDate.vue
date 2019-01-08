@@ -16,10 +16,10 @@
         :language="da"
         format="dd-MM-yy"
         monday-first
-        v-model="selected"
+        v-model="internalValue"
       />
       <input
-        v-model="selected"
+        v-model="internalValue"
         v-validate="validate"
         :name="identifier"
         :id="identifier"
@@ -46,8 +46,6 @@ export default {
       da: da,
       selected: null
     }
-  },
-  computed: {
   }
 }
 </script>

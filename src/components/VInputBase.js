@@ -77,7 +77,11 @@ export default Vue.extend({
       internalValue: null
     }
   },
-
+  watch: {
+    internalValue (newVal) {
+      this.$emit('input', newVal)
+    }
+  },
   computed: {
     identifier () {
       return this.id ? this.id : 'v-input-' + this._uid

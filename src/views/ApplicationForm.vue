@@ -66,8 +66,12 @@
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
       <v-headline :title="$t('more_info')" icon="file-alt"/>
-      <v-input-checkbox v-model="application.consent_declaration" :label="$t('consent_declaration')" description="jeg er en samtykkeerklæring" validate="required"/>
-      <v-input-checkbox v-model="application.privacy_policy" :label="$t('privacy_policy')" description="jeg er en privatlivspolitik" validate="required"/>
+      <v-input-checkbox v-model="application.consent_declaration" :label="$t('consent_declaration')" validate="required">
+        jeg er en samtykkeerklæring
+      </v-input-checkbox>
+      <v-input-checkbox v-model="application.privacy_policy" :label="$t('privacy_policy')" validate="required">
+        jeg er en privatlivspolitik
+      </v-input-checkbox>
 
       <button type="submit" class="govuk-button govuk-button--start">
         {{$t('send_application')}}
