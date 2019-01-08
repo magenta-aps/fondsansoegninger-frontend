@@ -29,6 +29,11 @@ export default {
   extends: VInputBase,
   name: 'VInputText',
   props: {
+    /**
+     * change size of input field
+     * @default null
+     * @type {String|Integer}
+     */
     size: {
       type: [Number, String],
       default: null

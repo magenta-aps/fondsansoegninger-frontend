@@ -7,6 +7,7 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons'
 import WordLimit from './validators/WordLimit'
 import Cvr from './validators/Cvr'
+import VueCurrencyFilter from 'vue-currency-filter'
 
 Vue.config.productionTip = false
 
@@ -17,10 +18,20 @@ const veeConfig = {
   inject: false
 }
 
+const currencyConfig = {
+  symbol: 'kr',
+  thousandsSeparator: '.',
+  fractionCount: 0,
+  fractionSeparator: ',',
+  symbolPosition: 'front',
+  symbolSpacing: true
+}
+
 Validator.localize('da', messagesDA)
 Validator.extend('word_limit', WordLimit)
 Validator.extend('cvr', Cvr)
 Vue.use(VeeValidate, veeConfig)
+Vue.use(VueCurrencyFilter, currencyConfig)
 Vue.component('v-icon', Icon)
 
 new Vue({
