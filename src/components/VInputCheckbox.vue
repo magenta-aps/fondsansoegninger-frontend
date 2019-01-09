@@ -4,7 +4,7 @@
       <label v-if="hasLabel" class="govuk-label" :for="identifier">
         {{label}}
       </label>
-      <span v-if="hasHint" id="changed-name-hint" class="govuk-hint">
+      <span v-if="hasHint" class="govuk-hint">
         {{hint}}
       </span>
       <span v-show="errors.has(identifier)" class="govuk-error-message">

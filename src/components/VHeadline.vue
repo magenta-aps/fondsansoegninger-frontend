@@ -8,8 +8,13 @@
 </template>
 
 <script>
+import Icon from 'vue-awesome/components/Icon'
+
 export default {
   name: 'VHeadline',
+  components: {
+    'v-icon': Icon
+  },
   props: {
     /**
      * the title

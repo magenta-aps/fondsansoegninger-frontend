@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-form-group" :class="errors.has(identifier) ? 'govuk-form-group--error' : ''">
-    <fieldset class="govuk-fieldset" aria-describedby="dob-hint" role="group">
+    <fieldset class="govuk-fieldset" role="group">
       <label v-if="hasLabel" class="govuk-label" :for="identifier">
       {{label}}
       </label>
@@ -32,8 +32,9 @@
 
 <script>
 import VInputBase from './VInputBase'
-import Datepicker from 'vuejs-datepicker'
+// import Datepicker from 'vuejs-datepicker'
 import { da } from 'vuejs-datepicker/dist/locale'
+const Datepicker = () => import(/* webpackChunkName: "datepicker" */ 'vuejs-datepicker')
 
 export default {
   extends: VInputBase,
@@ -52,9 +53,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
-.calendar-class {
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 </style>

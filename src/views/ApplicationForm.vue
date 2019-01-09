@@ -41,7 +41,7 @@
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
       <v-headline :title="$t('budget')" icon="dollar-sign"/>
-      <v-input-currency v-model="application.applied_amount" :label="$t('applied_amount')" validate="required"/>
+      <v-input-currency v-model="application.applied_amount" :label="$t('applied_amount')" validate="required" size="10"/>
       <v-input-upload v-model="application.budget" :label="$t('budget')" validate="required|size:2048"/>
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
