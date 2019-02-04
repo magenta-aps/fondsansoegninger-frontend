@@ -1,0 +1,31 @@
+$sparnord-colors: (
+  "fresh-red": #e4003f,
+  "sparnord-red": #bc2b30,
+  "sparnord-blue": #023671,
+  "warm-black": #393634,
+  "mole-1": #746661,
+  "mole-2": #5e514d,
+  "mole-3": #382f2d,
+  "warm-grey-1": #d7d2cb,
+  "warm-grey-2": #cbc4bc,
+  "warm-grey-3": #bfb8af,
+  "warm-grey-4": #b6ada5,
+  "warm-grey-5": #aca39a,
+  "warm-grey-6": #a59c94,
+  "warm-grey-7": #968c83,
+  "warm-grey-8": #8c8279,
+  "warm-grey-9": #83786f,
+  "warm-grey-10": #796e65,
+) !default;
+
+// Overrides for govuk input elements
+$govuk-border-width-form-element: 1px;
+$govuk-border-width-form-element-error: 2px;
+$govuk-border-width-form-group-error: 2px;
+
+// Overrides for govuk colors
+$govuk-error-colour: map-get($sparnord-colors, "fresh-red");
+$govuk-text-colour: map-get($sparnord-colors, "warm-black");
+$govuk-focus-text-colour: map-get($sparnord-colors, "warm-black");
+$govuk-input-border-colour: map-get($sparnord-colors, "warm-black");
+$govuk-body-background-colour: mix(map-get($sparnord-colors, "warm-black"), #fff, 10%)

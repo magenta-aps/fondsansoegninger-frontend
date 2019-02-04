@@ -23,7 +23,9 @@ export default {
 }
 </script>
 <style lang="scss">
+@import "./assets/scss/sparnord/vars.scss";
 @import "./assets/govuk-frontend/src/all.scss";
+
 body {
   margin: 0;
   padding: 0;
@@ -31,9 +33,19 @@ body {
 
 .govuk-header {
   background: transparent !important;
+  border-bottom-color: mix(map-get($sparnord-colors, "warm-black"), #fff, 10%); // body background color inside vars.scss
+  &__container {
+    border-bottom-color: map-get($sparnord-colors, "sparnord-red");
+    border-bottom-width:5px;
+  }
 }
 
 .govuk-header__logotype img {
-  width: 260px;
+  width: 200px;
+}
+
+.govuk-radios__input + .govuk-radios__label::before,
+.govuk-checkboxes__input + .govuk-checkboxes__label::before {
+  background:#fff;
 }
 </style>
