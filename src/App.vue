@@ -5,7 +5,7 @@
         <div class="govuk-header__logo">
           <a href="#" class="govuk-header__link govuk-header__link--homepage">
             <span class="govuk-header__logotype">
-              <img src="./assets/logo.svg" onerror="this.src='./assets/logo-fallback.png'">
+              <img src="./assets/danva-logo.svg" onerror="this.src='./assets/danva-logo.png'">
             </span>
           </a>
         </div>
@@ -23,6 +23,7 @@ export default {
 }
 </script>
 <style lang="scss">
+@import "./assets/scss/danva/vars.scss";
 @import "./assets/govuk-frontend/src/all.scss";
 body {
   margin: 0;
@@ -31,6 +32,11 @@ body {
 
 .govuk-header {
   background: transparent !important;
+  border-bottom-color: map-get($danva-colors, "white");
+  &__container {
+    border-bottom-color: map-get($danva-colors, "dark-blue");
+    border-bottom-width:10px;
+  }
 }
 
 .govuk-header__logotype img {

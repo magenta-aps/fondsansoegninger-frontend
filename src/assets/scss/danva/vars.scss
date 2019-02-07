@@ -1,0 +1,19 @@
+$danva-colors: (
+  "black": black,
+  "white": white,
+  "red": red,
+  "dark-blue": #1C4966,
+  "blue": #005a84,
+) !default;
+
+// Overrides for govuk input elements
+$govuk-border-width-form-element: 1px;
+$govuk-border-width-form-element-error: 2px;
+$govuk-border-width-form-group-error: 2px;
+
+// Overrides for govuk colors
+$govuk-error-colour: map-get($danva-colors, "red");
+$govuk-text-colour: map-get($danva-colors, "black");
+$govuk-focus-text-colour: map-get($danva-colors, "black");
+$govuk-input-border-colour: map-get($danva-colors, "black");
+$govuk-body-background-colour: map-get($danva-colors, "white");

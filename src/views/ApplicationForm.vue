@@ -1,11 +1,10 @@
 <template>
   <div>
-  <h1 class="govuk-heading-xl govuk-!-padding-top-9">Ansøgning til Spar Nord Fonden</h1>
+  <h1 class="govuk-heading-xl govuk-!-padding-top-9">Ansøgning til VUDP</h1>
   <div class="govuk-!-padding-top-2">
     <form @submit.stop.prevent="submitForm">
       <v-headline :title="$t('applicant')" icon="user"/>
-      <v-input-text v-model="application.cvr_no" :label="$t('cvr_no')" validate="required|digits:8|cvr" size="8"/>
-      <v-input-text v-model="application.organisation_name" :label="$t('organisation_name')" :hint="$t('organisation_name_hint')" validate="required"/>
+      <v-input-text v-model="application.company_name" :label="$t('company_name') + ' (' + $t('main_applicant') + ')'" validate="required"/>
       <v-input-text v-model="application.address" :label="$t('address')" validate="required"/>
 
       <div class="govuk-grid-row">
@@ -16,18 +15,102 @@
           <v-input-text v-model="application.city" :label="$t('city')" validate="required"/>
         </div>
       </div>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+      <v-input-text v-model="application.cvr_no" :label="$t('cvr_no')" validate="required|digits:8|cvr" size="8"/>
 
-      <v-headline :title="$t('contact_person')" icon="user"/>
-      <v-input-text v-model="application.first_name" :label="$t('first_name')" :hint="$t('first_name_hint')" validate="required"/>
-      <v-input-text v-model="application.last_name" :label="$t('last_name')" validate="required"/>
-      <v-input-text v-model="application.email" :label="$t('email')" :hint="$t('email_hint')" validate="required|email"/>
-      <v-input-text v-model="application.phone" :label="$t('phone')" :hint="$t('phone_hint')" validate="required|digits:8"/>
+      <v-input-text v-model="application.contact_name" :label="$t('contact_name')" :hint="$t('contact_name_hint')" validate="required"/>
+      <v-input-text v-model="application.contact_email" :label="$t('contact_email')" validate="required|email"/>
+      <v-input-text v-model="application.contact_phone" :label="$t('contact_phone')" validate="required|digits:8"/>
+
+      <h3 class="govuk-heading-m">Øvrige projektpartner(e)</h3>
+      <template v-for="(partner, idx) in application.partners">
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+        <button v-if="idx > 0" type="button" @click="removePartner(partner.id)" class="govuk-button">
+          {{ $t('remove_partner') }}
+        </button>
+        <v-input-text v-model="partner.company_name" :label="$t('company_name')" validate="required" :key="'partner-name-' + partner.id"/>
+        <v-input-text v-model="partner.cvr_no" :label="$t('cvr_no')" validate="required|digits:8|cvr" size="8" :key="'partner-cvr-' + partner.id"/>
+        <v-input-text v-model="partner.contact_person" :label="$t('contact_person')" validate="required" :key="'partner-contactperson-' + partner.id"/>
+        <v-input-text v-model="partner.project_role" :label="$t('project_role')" :hint="$t('project_role_hint')" validate="required|word_limit:15" :key="'partner-role-' + partner.id"/>
+      </template>
+
+      <button type="button" @click="addPartner" class="govuk-button govuk-button--start">
+        {{ $t('add_partner') }}
+      </button>
+
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
       <v-headline :title="$t('project')" icon="home"/>
-      <v-input-text v-model="application.project_title" :label="$t('project_title')" :hint="$t('project_title_hint')" validate="required|max:250"/>
-      <v-input-textarea v-model="application.short_project_description" :label="$t('short_project_description')" :hint="$t('short_project_description_hint')" validate="required|word_limit:500"/>
+      <v-input-textarea v-model="application.project_title" :label="$t('project_title')" :hint="$t('project_title_hint')" validate="required|word_limit:150"/>
+      <span class="govuk-label">{{ $t('subject') }}</span>
+      <span class="govuk-hint">{{ $t('subject_hint') }}</span>
+      <template v-for="subject in subjects">
+        <v-input-checkbox v-model="application.subject" :checkboxVal="subject.label" validate="">
+          {{ subject.label }}
+        </v-input-checkbox>
+      </template>
+
+      <v-input-textarea v-model="application.project_idea" :label="$t('project_idea')" :hint="$t('project_idea_hint')" validate="required|word_limit:470"/>
+      <v-input-textarea v-model="application.project_argument" :label="$t('project_argument')" :hint="$t('project_argument_hint')" validate="required|word_limit:70"/>
+      <v-input-textarea v-model="application.project_output" :label="$t('project_output')" :hint="$t('project_output_hint')" validate="required|word_limit:70"/>
+      <v-input-textarea v-model="application.project_newsworthy" :label="$t('project_newsworthy')" :hint="$t('project_newsworthy_hint')" validate="required|word_limit:140"/>
+      <v-input-textarea v-model="application.project_benefit" :label="$t('project_benefit')" :hint="$t('project_benefit_hint')" validate="required|word_limit:70"/>
+      <v-input-textarea v-model="application.project_sustainability" :label="$t('project_sustainability')" :hint="$t('project_sustainability_hint')" validate="required|word_limit:140"/>
+
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+
+      <v-headline :title="$t('project_period') + ' ' + $t('and') + ' ' + $t('budget').toLowerCase()" icon="dollar-sign"/>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <v-input-date v-model="application.start_date" :label="$t('expected_project_start')" :hint="$t('expected_project_start_hint')" validate="required"/>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <v-input-date v-model="application.end_date" :label="$t('expected_project_end')" :hint="$t('expected_project_end_hint')" validate="required"/>
+        </div>
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <v-input-currency v-model="application.applied_amount" :label="$t('total_budget')" :hint="$t('total_budget_hint')" validate="required" size="10"/>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <v-input-currency v-model="application.total_budget" :label="$t('applied_amount')" :hint="$t('applied_amount_hint')" validate="required|max_value:1500000" size="10"/>
+        </div>
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+
+      <v-headline :title="$t('project_accountable')" icon="user"/>
+
+      <span class="govuk-label">
+        Navn og stilling på projektleder/kontaktperson samt juridisk eller økonomisk ansvarlig hos hovedansøger.
+      </span>
+      <span class="govuk-hint">
+        Hovedansøger er hovedansvarlig overfor VUDP, og alle udbetalinger sker udelukkende til hovedansøger.
+      </span>
+
+      <span class="govuk-label">{{ $t('project_manager') }}</span>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <v-input-text v-model="application.project_manager_name" :label="$t('name')" validate="required"/>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <v-input-text v-model="application.project_manager_title" :label="$t('title')" validate="required"/>
+        </div>
+      </div>
+
+      <span class="govuk-label">{{ $t('financially_responsible') }}</span>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <v-input-text v-model="application.responsible_finance_name" :label="$t('name')" validate="required"/>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <v-input-text v-model="application.responsible_finance_title" :label="$t('title')" validate="required"/>
+        </div>
+      </div>
+
+
+      <!-- <v-input-textarea v-model="application.short_project_description" :label="$t('short_project_description')" :hint="$t('short_project_description_hint')" validate="required|word_limit:500"/>
       <v-input-upload v-model="application.in_depth_project_description" :label="$t('in_depth_project_description')" :hint="$t('in_depth_project_description_hint')" validate="required|size:2048"/>
       <v-input-radio v-model="application.category" :label="$t('category')" :hint="$t('category_hint')" :options="radioOptions" validate="required"/>
       <div class="govuk-grid-row">
@@ -73,7 +156,7 @@
       </v-input-checkbox>
       <v-input-checkbox v-model="application.privacy_policy" :label="$t('privacy_policy')" validate="required">
         jeg er en privatlivspolitik
-      </v-input-checkbox>
+      </v-input-checkbox> -->
 
       <button type="submit" class="govuk-button govuk-button--start">
         {{$t('send_application')}}
@@ -111,7 +194,14 @@ export default {
   },
   data () {
     return {
-      application: {},
+      application: {
+        partners: [
+          {
+            id: this.partnerId
+          }
+        ],
+        subject: []
+      },
       radioOptions: [
         {
           label: 'Initiativer i og for lokalsamfundet',
@@ -129,7 +219,19 @@ export default {
           label: 'Kulturelle aktiviteter',
           uuid: 'some-uuid-4'
         }
-      ]
+      ],
+      subjects: [
+        {
+          label: 'Spildevand'
+        },
+        {
+          label: 'Drikkevand'
+        },
+        {
+          label: 'Klimatilpasning'
+        }
+      ],
+      partnerId: 0
     }
   },
   computed: {
@@ -165,7 +267,22 @@ export default {
           console.log(response)
           this.$router.push({ name: 'thankyou' })
         })
+    },
+
+    addPartner () {
+      // we need an incremental ID so that v-validate doesn't reuse fields: https://baianat.github.io/vee-validate/guide/conditional-and-looping-inputs.html#handling-v-for
+      this.partnerId++
+      this.application.partners.push({
+        id: this.partnerId
+      })
+    },
+
+    removePartner(id) {
+      this.application.partners = this.application.partners.filter(partner => partner.id !== id)
     }
+  },
+  created () {
+    this.application.partners[0].id = this.partnerId // init first partnerId in created(), as we can't get this.partnerId when setting this.application.partners[0].id inside data().
   }
 }
 </script>

@@ -45,7 +45,7 @@ export default {
       return this.value
     },
     validationRules () {
-      let rules = 'numeric|max_value:99999999999'
+      let rules = 'numeric'
       let extraRules = this.validate ? this.validate + '|' : ''
       return extraRules + rules
     },
