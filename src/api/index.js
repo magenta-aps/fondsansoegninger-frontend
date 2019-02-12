@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:3000/service'
+const BASE_URL = 'http://localhost:8080/webapi/rest'
 
 export default {
-  async apply (formData) {
-    const url = `${BASE_URL}/submit`
+  sendApplication (formData) {
+    const url = `${BASE_URL}`
     return axios.post(url, formData)
       .then(response => {
         console.log(response)

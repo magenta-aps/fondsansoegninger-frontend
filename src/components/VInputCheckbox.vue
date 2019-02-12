@@ -1,7 +1,7 @@
 <template>
   <div class="govuk-form-group" :class="errors.has(identifier) ? 'govuk-form-group--error' : ''">
     <fieldset class="govuk-fieldset">
-      <label v-if="hasLabel" class="govuk-label">
+      <label v-if="hasLabel" class="govuk-label sr-only">
         {{label}}
       </label>
       <span v-if="hasHint" class="govuk-hint">

@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
+  // publicPath: '/dist/', // correct linking when app is deployed in dist/ folder on server
   lintOnSave: true,
   runtimeCompiler: true, // allows the template option in components
   chainWebpack: config => {

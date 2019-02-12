@@ -43,8 +43,8 @@
       <v-input-textarea v-model="application.project_title" :label="$t('project_title')" :hint="$t('project_title_hint')" validate="required|word_limit:150"/>
       <span class="govuk-label">{{ $t('subject') }}</span>
       <span class="govuk-hint">{{ $t('subject_hint') }}</span>
-      <template v-for="subject in subjects">
-        <v-input-checkbox v-model="application.subject" :checkboxVal="subject.label" validate="">
+      <template v-for="(subject, index) in subjects">
+        <v-input-checkbox v-model="application.subject" :checkboxVal="subject.label" validate="required" :label="subject.label">
           {{ subject.label }}
         </v-input-checkbox>
       </template>
@@ -108,55 +108,6 @@
           <v-input-text v-model="application.responsible_finance_title" :label="$t('title')" validate="required"/>
         </div>
       </div>
-
-
-      <!-- <v-input-textarea v-model="application.short_project_description" :label="$t('short_project_description')" :hint="$t('short_project_description_hint')" validate="required|word_limit:500"/>
-      <v-input-upload v-model="application.in_depth_project_description" :label="$t('in_depth_project_description')" :hint="$t('in_depth_project_description_hint')" validate="required|size:2048"/>
-      <v-input-radio v-model="application.category" :label="$t('category')" :hint="$t('category_hint')" :options="radioOptions" validate="required"/>
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-half">
-          <v-input-date :label="$t('expected_project_start')" validate="required"/>
-        </div>
-        <div class="govuk-grid-column-one-half">
-          <v-input-date :label="$t('expected_project_end')" validate="required"/>
-        </div>
-      </div>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
-
-      <v-headline :title="$t('budget')" icon="dollar-sign"/>
-      <v-input-currency v-model="application.applied_amount" :label="$t('applied_amount')" validate="required" size="10"/>
-      <v-input-upload v-model="application.budget" :label="$t('budget')" validate="required|size:2048"/>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
-
-      <v-headline :title="$t('documents')" icon="paperclip"/>
-      <div class="govuk-inset-text">
-        {{$t('all_files_must_be_pdf')}}
-      </div>
-      <v-input-upload v-model="application.articles_of_association" :label="$t('articles_of_association')" :hint="$t('articles_of_association_hint')" validate="required|size:2048"/>
-      <v-input-upload v-model="application.board_combination" :label="$t('board_combination')" :hint="$t('board_combination_hint')" validate="size:2048"/>
-      <v-input-upload v-model="application.accountancy" :label="$t('accountancy')" :hint="$t('accountancy_hint')" validate="size:2048"/>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
-
-      <v-headline :title="$t('bank_info')" icon="university"/>
-      <v-input-text v-model="application.bank_name" :label="$t('bank_name')" validate="required"/>
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-third">
-          <v-input-text v-model="application.reg_no" :label="$t('reg_no')" validate="required|max:4"/>
-        </div>
-        <div class="govuk-grid-column-two-thirds">
-          <v-input-text v-model="application.account_no" :label="$t('account_no')" validate="required|max:8"/>
-        </div>
-      </div>
-      <v-input-upload v-model="application.bank_account_ownership" :label="$t('bank_account_ownership')" validate="required|size:2048"/>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
-
-      <v-headline :title="$t('more_info')" icon="file-alt"/>
-      <v-input-checkbox v-model="application.consent_declaration" :label="$t('consent_declaration')" validate="required">
-        jeg er en <a href="#">samtykkeerklæring</a>
-      </v-input-checkbox>
-      <v-input-checkbox v-model="application.privacy_policy" :label="$t('privacy_policy')" validate="required">
-        jeg er en privatlivspolitik
-      </v-input-checkbox> -->
 
       <button type="submit" class="govuk-button govuk-button--start">
         {{$t('send_application')}}
@@ -247,14 +198,13 @@ export default {
   methods: {
     submitForm () {
       if (this.formValid) {
-        console.log('submit form')
-        this.upload()
+        this.postToBackend()
       } else {
         this.$validator.validateAll()
       }
     },
 
-    upload () {
+    postToBackend () {
       const formData = new FormData()
       let vm = this
       Object.keys(this.application).map(function (key, index) {
@@ -262,7 +212,7 @@ export default {
         formData.append(key, value)
       })
 
-      Api.apply(formData)
+      Api.sendApplication(formData)
         .then(response => {
           console.log(response)
           this.$router.push({ name: 'thankyou' })
