@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:8080/webapi/rest'
+const BASE_URL = 'http://alfrescodanva8080.magenta.dk/webapi/rest'
 
 export default {
   sendApplication (formData) {
