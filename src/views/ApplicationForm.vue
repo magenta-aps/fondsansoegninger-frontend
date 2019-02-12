@@ -44,7 +44,7 @@
       <span class="govuk-label">{{ $t('subject') }}</span>
       <span class="govuk-hint">{{ $t('subject_hint') }}</span>
       <template v-for="(subject, index) in subjects">
-        <v-input-checkbox v-model="application.subject" :checkboxVal="subject.label" validate="required" :label="subject.label">
+        <v-input-checkbox v-model="application.subject" :checkboxVal="subject.label" validate="" :label="subject.label">
           {{ subject.label }}
         </v-input-checkbox>
       </template>
