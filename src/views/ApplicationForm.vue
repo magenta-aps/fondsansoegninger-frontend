@@ -209,6 +209,14 @@ export default {
       let vm = this
       Object.keys(this.application).map(function (key, index) {
         let value = vm.application[key]
+        if (Array.isArray(value)) {
+          value = value.map(item => { // loop through all array items
+            if (item !== null && typeof item === 'object') {
+              return JSON.stringify(item) // if the item is an object, stringify it
+            }
+            return item
+          })
+        }
         formData.append(key, value)
       })
 
