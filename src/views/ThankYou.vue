@@ -3,6 +3,9 @@
     <h1 class="govuk-heading-xl govuk-!-padding-top-9">
       Tak for din ansøgning
     </h1>
+    <p>
+      Vi har sendt en bekræftelsesmail til kontaktpersonens e-mailadresse.
+    </p>
   </div>
 </template>
 
