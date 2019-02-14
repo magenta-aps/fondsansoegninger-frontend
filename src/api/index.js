@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://alfrescodanva8080.magenta.dk/webapi/rest'
+const BASE_URL = process.env.VUE_APP_API_ENDPOINT
 
 export default {
   sendApplication (formData) {
