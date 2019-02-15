@@ -4,9 +4,8 @@
       <label v-if="hasLabel" class="govuk-label sr-only">
         {{label}}
       </label>
-      <span v-if="hasHint" class="govuk-hint">
-        {{hint}}
-      </span>
+      <div v-if="hasHint" class="govuk-hint" v-html="hint">
+      </div>
       <span v-show="errors.has(identifier)" class="govuk-error-message">
         {{ errors.first(identifier) }}
       </span>

@@ -7,6 +7,9 @@
     </p>
     <form @submit.stop.prevent="submitForm" class="govuk-!-padding-top-4">
       <v-headline :title="$t('applicant')" icon="user"/>
+      <p>
+        {{ $t('main_applicant_description') }}
+      </p>
       <v-input-text v-model="application.company_name" :label="$t('company_name') + ' (' + $t('main_applicant') + ')'" validate="required"/>
       <v-input-text v-model="application.address" :label="$t('address')" validate="required"/>
 
@@ -24,9 +27,12 @@
       <v-input-text v-model="application.contact_email" :label="$t('contact_email')" validate="required|email"/>
       <v-input-text v-model="application.contact_phone" :label="$t('contact_phone')" validate="required|digits:8"/>
 
-      <h3 class="govuk-heading-m">Øvrige projektpartner(e)</h3>
+      <h3 class="govuk-heading-m">{{$t('assign_project_partners')}}</h3>
+      <p>
+        {{ $t('project_partner_description') }}
+      </p>
       <template v-for="(partner, idx) in application.partners">
-        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
+        <hr v-if="idx > 0" class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
         <button v-if="idx > 0" type="button" @click="removePartner(partner.id)" class="govuk-button">
           {{ $t('remove_partner') }}
         </button>
@@ -52,7 +58,7 @@
         </v-input-checkbox>
       </template>
 
-      <v-input-textarea v-model="application.project_idea" :label="$t('project_idea')" :hint="$t('project_idea_hint')" validate="required|word_limit:470"/>
+      <v-input-textarea v-model="application.project_description" :label="$t('project_description')" :hint="$t('project_description_hint')" validate="required|word_limit:470"/>
       <v-input-textarea v-model="application.project_argument" :label="$t('project_argument')" :hint="$t('project_argument_hint')" validate="required|word_limit:70"/>
       <v-input-textarea v-model="application.project_output" :label="$t('project_output')" :hint="$t('project_output_hint')" validate="required|word_limit:70"/>
       <v-input-textarea v-model="application.project_newsworthy" :label="$t('project_newsworthy')" :hint="$t('project_newsworthy_hint')" validate="required|word_limit:140"/>
@@ -61,7 +67,7 @@
 
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
-      <v-headline :title="$t('project_period') + ' ' + $t('and') + ' ' + $t('budget').toLowerCase()" icon="dollar-sign"/>
+      <v-headline :title="$t('project_period')" icon="calendar"/>
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
@@ -71,6 +77,8 @@
           <v-input-date v-model="application.end_date" :label="$t('expected_project_end')" :hint="$t('expected_project_end_hint')" validate="required"/>
         </div>
       </div>
+
+      <v-headline :title="$t('budget')" icon="dollar-sign"/>
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
