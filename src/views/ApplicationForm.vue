@@ -1,8 +1,11 @@
 <template>
   <div>
   <h1 class="govuk-heading-xl govuk-!-padding-top-9">Ansøgning til VUDP</h1>
-  <div class="govuk-!-padding-top-2">
-    <form @submit.stop.prevent="submitForm">
+  <div class="govuk-body">
+    <p>
+      <a href="./2019-vudp-ansoegningsvejledning-fase1.pdf" target="_blank">{{ $t('application_guide') }} (pdf)</a>
+    </p>
+    <form @submit.stop.prevent="submitForm" class="govuk-!-padding-top-4">
       <v-headline :title="$t('applicant')" icon="user"/>
       <v-input-text v-model="application.company_name" :label="$t('company_name') + ' (' + $t('main_applicant') + ')'" validate="required"/>
       <v-input-text v-model="application.address" :label="$t('address')" validate="required"/>
