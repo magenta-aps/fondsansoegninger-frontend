@@ -5,9 +5,7 @@ const BASE_URL = process.env.VUE_APP_API_ENDPOINT
 export default {
   sendApplication (formData) {
     const url = `${BASE_URL}`
-    return axios.post({
-      url: url,
-      data: formData,
+    return axios.post(url, formData, {
       headers: {
         'Content-Type': 'application/json'
       }
