@@ -55,10 +55,10 @@ export default Vue.extend({
     /**
      * Vee-validate validation string
      * @default null
-     * @type {String}
+     * @type {String||Object}
      */
     validate: {
-      type: String,
+      type: [String, Object],
       default: null
     },
     /**
