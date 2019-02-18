@@ -10,22 +10,22 @@
       <p>
         {{ $t('main_applicant_description') }}
       </p>
-      <v-input-text v-model="application.company_name" :label="$t('company_name') + ' (' + $t('main_applicant') + ')'" validate="required"/>
-      <v-input-text v-model="application.address" :label="$t('address')" validate="required"/>
+      <v-input-text v-model="application.applicant.company_name" :label="$t('company_name') + ' (' + $t('main_applicant') + ')'" validate="required"/>
+      <v-input-text v-model="application.applicant.address" :label="$t('address')" validate="required"/>
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-third">
-          <v-input-text v-model="application.zip_code" :label="$t('zip_code')" validate="required|digits:4"/>
+          <v-input-text v-model="application.applicant.zip_code" :label="$t('zip_code')" validate="required|digits:4"/>
         </div>
         <div class="govuk-grid-column-two-thirds">
-          <v-input-text v-model="application.city" :label="$t('city')" validate="required"/>
+          <v-input-text v-model="application.applicant.city" :label="$t('city')" validate="required"/>
         </div>
       </div>
-      <v-input-text v-model="application.cvr_no" :label="$t('cvr_no')" validate="required|digits:8|cvr" size="8"/>
+      <v-input-text v-model="application.applicant.cvr_no" :label="$t('cvr_no')" validate="required|digits:8|cvr" size="8"/>
 
-      <v-input-text v-model="application.contact_name" :label="$t('contact_name')" :hint="$t('contact_name_hint')" validate="required"/>
-      <v-input-text v-model="application.contact_email" :label="$t('contact_email')" validate="required|email"/>
-      <v-input-text v-model="application.contact_phone" :label="$t('contact_phone')" validate="required|digits:8"/>
+      <v-input-text v-model="application.applicant.contact_name" :label="$t('contact_name')" :hint="$t('contact_name_hint')" validate="required"/>
+      <v-input-text v-model="application.applicant.contact_email" :label="$t('contact_email')" validate="required|email"/>
+      <v-input-text v-model="application.applicant.contact_phone" :label="$t('contact_phone')" validate="required|digits:8"/>
 
       <h3 class="govuk-heading-m">{{$t('assign_project_partners')}}</h3>
       <p>
@@ -49,21 +49,21 @@
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
       <v-headline :title="$t('project')" icon="home"/>
-      <v-input-textarea v-model="application.project_title" :label="$t('project_title')" :hint="$t('project_title_hint')" validate="required|word_limit:150"/>
+      <v-input-textarea v-model="application.project.project_title" :label="$t('project_title')" :hint="$t('project_title_hint')" validate="required|word_limit:150"/>
       <span class="govuk-label">{{ $t('subject') }}</span>
       <span class="govuk-hint">{{ $t('subject_hint') }}</span>
       <template v-for="(subject, index) in subjects">
-        <v-input-checkbox v-model="application.subject" :checkboxVal="subject.label" validate="" :label="subject.label">
+        <v-input-checkbox v-model="application.project.subject" :checkboxVal="subject.label" validate="" :label="subject.label">
           {{ subject.label }}
         </v-input-checkbox>
       </template>
 
-      <v-input-textarea v-model="application.project_description" :label="$t('project_description')" :hint="$t('project_description_hint')" validate="required|word_limit:470"/>
-      <v-input-textarea v-model="application.project_argument" :label="$t('project_argument')" :hint="$t('project_argument_hint')" validate="required|word_limit:70"/>
-      <v-input-textarea v-model="application.project_output" :label="$t('project_output')" :hint="$t('project_output_hint')" validate="required|word_limit:70"/>
-      <v-input-textarea v-model="application.project_newsworthy" :label="$t('project_newsworthy')" :hint="$t('project_newsworthy_hint')" validate="required|word_limit:140"/>
-      <v-input-textarea v-model="application.project_benefit" :label="$t('project_benefit')" :hint="$t('project_benefit_hint')" validate="required|word_limit:70"/>
-      <v-input-textarea v-model="application.project_sustainability" :label="$t('project_sustainability')" :hint="$t('project_sustainability_hint')" validate="required|word_limit:140"/>
+      <v-input-textarea v-model="application.project.project_description" :label="$t('project_description')" :hint="$t('project_description_hint')" validate="required|word_limit:470"/>
+      <v-input-textarea v-model="application.project.project_argument" :label="$t('project_argument')" :hint="$t('project_argument_hint')" validate="required|word_limit:70"/>
+      <v-input-textarea v-model="application.project.project_output" :label="$t('project_output')" :hint="$t('project_output_hint')" validate="required|word_limit:70"/>
+      <v-input-textarea v-model="application.project.project_newsworthy" :label="$t('project_newsworthy')" :hint="$t('project_newsworthy_hint')" validate="required|word_limit:140"/>
+      <v-input-textarea v-model="application.project.project_benefit" :label="$t('project_benefit')" :hint="$t('project_benefit_hint')" validate="required|word_limit:70"/>
+      <v-input-textarea v-model="application.project.project_sustainability" :label="$t('project_sustainability')" :hint="$t('project_sustainability_hint')" validate="required|word_limit:140"/>
 
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
@@ -71,10 +71,10 @@
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <v-input-date v-model="application.start_date" :label="$t('expected_project_start')" :hint="$t('expected_project_start_hint')" validate="required"/>
+          <v-input-date v-model="application.project_period.start_date" :label="$t('expected_project_start')" :hint="$t('expected_project_start_hint')" validate=""/>
         </div>
         <div class="govuk-grid-column-one-half">
-          <v-input-date v-model="application.end_date" :label="$t('expected_project_end')" :hint="$t('expected_project_end_hint')" validate="required"/>
+          <v-input-date v-model="application.project_period.end_date" :label="$t('expected_project_end')" :hint="$t('expected_project_end_hint')" validate=""/>
         </div>
       </div>
 
@@ -82,10 +82,10 @@
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <v-input-currency v-model="application.applied_amount" :label="$t('total_budget')" :hint="$t('total_budget_hint')" validate="required" size="10"/>
+          <v-input-currency v-model="application.budget.applied_amount" :label="$t('total_budget')" :hint="$t('total_budget_hint')" validate="required" size="10"/>
         </div>
         <div class="govuk-grid-column-one-half">
-          <v-input-currency v-model="application.total_budget" :label="$t('applied_amount')" :hint="$t('applied_amount_hint')" validate="required|max_value:1500000" size="10"/>
+          <v-input-currency v-model="application.budget.total_budget" :label="$t('applied_amount')" :hint="$t('applied_amount_hint')" validate="required|max_value:1500000" size="10"/>
         </div>
       </div>
 
@@ -103,20 +103,20 @@
       <span class="govuk-label">{{ $t('project_manager') }}</span>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <v-input-text v-model="application.project_manager_name" :label="$t('name')" validate="required"/>
+          <v-input-text v-model="application.accountability.project_manager_name" :label="$t('name')" validate="required"/>
         </div>
         <div class="govuk-grid-column-one-half">
-          <v-input-text v-model="application.project_manager_title" :label="$t('title')" validate="required"/>
+          <v-input-text v-model="application.accountability.project_manager_title" :label="$t('title')" validate="required"/>
         </div>
       </div>
 
       <span class="govuk-label">{{ $t('financially_responsible') }}</span>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <v-input-text v-model="application.responsible_finance_name" :label="$t('name')" validate="required"/>
+          <v-input-text v-model="application.accountability.responsible_finance_name" :label="$t('name')" validate="required"/>
         </div>
         <div class="govuk-grid-column-one-half">
-          <v-input-text v-model="application.responsible_finance_title" :label="$t('title')" validate="required"/>
+          <v-input-text v-model="application.accountability.responsible_finance_title" :label="$t('title')" validate="required"/>
         </div>
       </div>
 
@@ -157,12 +157,18 @@ export default {
   data () {
     return {
       application: {
+        applicant: {},
         partners: [
           {
             id: this.partnerId
           }
         ],
-        subject: []
+        project: {
+          subject: []
+        },
+        project_period: {},
+        budget: {},
+        accountability: {}
       },
       radioOptions: [
         {
@@ -204,10 +210,33 @@ export default {
       return Object.keys(this.fields).every(field => {
         return this.fields[field] && this.fields[field].valid
       })
+    },
+    /**
+     * Convert the application object to block format
+     */
+    parsedApplication () {
+      let app = {
+        blocks: []
+      }
+      Object.keys(this.application).forEach(section_key => {
+        let block = {
+          label: section_key,
+          fields: []
+        }
+        Object.entries(this.application[section_key]).forEach(([field_key, field_value]) => {
+          let field = {}
+          field.content = field_value
+          field.label = field_key
+          block.fields.push(field)
+        })
+        app.blocks.push(block)
+      })
+      return app
     }
   },
   methods: {
     submitForm () {
+      console.log(this.parsedApplication)
       if (this.formValid) {
         this.postToBackend()
       } else {
@@ -216,22 +245,22 @@ export default {
     },
 
     postToBackend () {
-      const formData = new FormData()
-      let vm = this
-      Object.keys(this.application).map(function (key, index) {
-        let value = vm.application[key]
-        if (Array.isArray(value)) {
-          value = value.map(item => { // loop through all array items
-            if (item !== null && typeof item === 'object') {
-              return JSON.stringify(item) // if the item is an object, stringify it
-            }
-            return item
-          })
-        }
-        formData.append(key, value)
-      })
+      // const formData = new FormData()
+      // let vm = this
+      // Object.keys(this.application).map(function (key, index) {
+      //   let value = vm.application[key]
+      //   if (Array.isArray(value)) {
+      //     value = value.map(item => { // loop through all array items
+      //       if (item !== null && typeof item === 'object') {
+      //         return JSON.stringify(item) // if the item is an object, stringify it
+      //       }
+      //       return item
+      //     })
+      //   }
+      //   formData.append(key, value)
+      // })
 
-      Api.sendApplication(formData)
+      Api.sendApplication(this.parsedApplication)
         .then(response => {
           console.log(response)
           this.$router.push({ name: 'thankyou' })
