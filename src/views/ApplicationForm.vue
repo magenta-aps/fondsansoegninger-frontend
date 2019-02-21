@@ -71,10 +71,10 @@
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <v-input-date v-model="application.project_period.start_date" :label="$t('expected_project_start')" :hint="$t('expected_project_start_hint')" validate=""/>
+          <v-input-date v-model="application.project_period.start_date" :label="$t('start_date')" :hint="$t('start_date_hint')" validate=""/>
         </div>
         <div class="govuk-grid-column-one-half">
-          <v-input-date v-model="application.project_period.end_date" :label="$t('expected_project_end')" :hint="$t('expected_project_end_hint')" validate=""/>
+          <v-input-date v-model="application.project_period.end_date" :label="$t('end_date')" :hint="$t('end_date_hint')" validate=""/>
         </div>
       </div>
 
@@ -82,41 +82,36 @@
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <v-input-currency v-model="application.budget.applied_amount" :label="$t('total_budget')" :hint="$t('total_budget_hint')" validate="required" size="10"/>
+          <v-input-currency v-model="application.budget.total_budget" :label="$t('total_budget')" :hint="$t('total_budget_hint')" validate="required" size="10"/>
         </div>
         <div class="govuk-grid-column-one-half">
-          <v-input-currency v-model="application.budget.total_budget" :label="$t('applied_amount')" :hint="$t('applied_amount_hint')" validate="required|max_value:1500000" size="10"/>
+          <v-input-currency v-model="application.budget.applied_amount" :label="$t('applied_amount')" :hint="$t('applied_amount_hint')" validate="required|max_value:1500000" size="10"/>
         </div>
       </div>
 
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-padding-top-3">
 
-      <v-headline :title="$t('project_accountable')" icon="user"/>
+      <v-headline :title="$t('accountability')" icon="user"/>
 
-      <span class="govuk-label">
-        Navn og stilling på projektleder/kontaktperson samt juridisk eller økonomisk ansvarlig hos hovedansøger.
-      </span>
       <span class="govuk-hint">
-        Hovedansøger er hovedansvarlig overfor VUDP, og alle udbetalinger sker udelukkende til hovedansøger.
+        Navn og stilling på projektleder/kontaktperson samt juridisk eller økonomisk ansvarlig hos hovedansøger. Hovedansøger er hovedansvarlig overfor VUDP, og alle udbetalinger sker udelukkende til hovedansøger.
       </span>
 
-      <span class="govuk-label">{{ $t('project_manager') }}</span>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <v-input-text v-model="application.accountability.project_manager_name" :label="$t('name')" validate="required"/>
+          <v-input-text v-model="application.accountability.project_manager_name" :label="$t('project_manager_name')" validate="required"/>
         </div>
         <div class="govuk-grid-column-one-half">
-          <v-input-text v-model="application.accountability.project_manager_title" :label="$t('title')" validate="required"/>
+          <v-input-text v-model="application.accountability.project_manager_title" :label="$t('project_manager_title')" validate="required"/>
         </div>
       </div>
 
-      <span class="govuk-label">{{ $t('financially_responsible') }}</span>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <v-input-text v-model="application.accountability.responsible_finance_name" :label="$t('name')" validate="required"/>
+          <v-input-text v-model="application.accountability.responsible_finance_name" :label="$t('responsible_finance_name')" validate="required"/>
         </div>
         <div class="govuk-grid-column-one-half">
-          <v-input-text v-model="application.accountability.responsible_finance_title" :label="$t('title')" validate="required"/>
+          <v-input-text v-model="application.accountability.responsible_finance_title" :label="$t('responsible_finance_title')" validate="required"/>
         </div>
       </div>
 
@@ -221,12 +216,27 @@ export default {
       Object.keys(this.application).forEach(section_key => {
         let block = {
           label: section_key,
+          display_name: this.$te(section_key) ? this.$t(section_key) : section_key, // if a translation exists, use it. Otherwise just use the key
           fields: []
         }
         Object.entries(this.application[section_key]).forEach(([field_key, field_value]) => {
-          let field = {}
-          field.content = field_value
-          field.label = field_key
+          let field = {
+            label: field_key,
+            display_name: this.$te(field_key) ? this.$t(field_key) : field_key
+          }
+          const valueIsObject = typeof field_value === 'object' && field_value !== null
+          if (!valueIsObject) {
+            field.content = field_value
+          }
+          else { // if the content of the field in question is an object, loop over its entries and construct a new object
+            field.content = {}
+            Object.entries(field_value).forEach(([prop_key, prop_value]) => {
+              field.content[prop_key] = {
+                value: prop_value,
+                display_name: this.$te(prop_key) ? this.$t(prop_key) : prop_key
+              }
+            })
+          }
           block.fields.push(field)
         })
         app.blocks.push(block)
@@ -262,7 +272,7 @@ export default {
 
       Api.sendApplication(this.parsedApplication)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           this.$router.push({ name: 'thankyou' })
         })
     },
