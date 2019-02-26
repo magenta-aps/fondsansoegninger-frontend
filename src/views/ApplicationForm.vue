@@ -216,26 +216,32 @@ export default {
       Object.keys(this.application).forEach(section_key => {
         let block = {
           label: section_key,
-          display_name: this.$te(section_key) ? this.$t(section_key) : section_key, // if a translation exists, use it. Otherwise just use the key
+          display_name: this.checkTranslation(section_key),
           fields: []
         }
         Object.entries(this.application[section_key]).forEach(([field_key, field_value]) => {
           let field = {
             label: field_key,
-            display_name: this.$te(field_key) ? this.$t(field_key) : field_key
+            display_name: this.checkTranslation(field_key)
           }
           const valueIsObject = typeof field_value === 'object' && field_value !== null
-          if (!valueIsObject) {
+          if (!valueIsObject) { // Date inherits from Object, so valueIsObject will never be false for Date
             field.content = field_value
           }
           else { // if the content of the field in question is an object, loop over its entries and construct a new object
-            field.content = {}
-            Object.entries(field_value).forEach(([prop_key, prop_value]) => {
-              field.content[prop_key] = {
-                value: prop_value,
-                display_name: this.$te(prop_key) ? this.$t(prop_key) : prop_key
-              }
-            })
+            // caveat: Date has no .entries() (it's an empty array), so we need to treat Date as special case because it inherits from Object
+            if (this.isDate(field_value)) {
+              field.content = field_value.toISOString()
+            }
+            else {
+              field.content = {}
+              Object.entries(field_value).forEach(([prop_key, prop_value]) => {
+                field.content[prop_key] = {
+                  value: prop_value,
+                  display_name: this.checkTranslation(prop_key)
+                }
+              })
+            }
           }
           block.fields.push(field)
         })
@@ -287,6 +293,14 @@ export default {
 
     removePartner(id) {
       this.application.partners = this.application.partners.filter(partner => partner.id !== id)
+    },
+
+    isDate(date) {
+      return date instanceof Date
+    },
+
+    checkTranslation(key) {
+      return this.$te(key) ? this.$t(key) : key // if a translation exists, use it. Otherwise just use the key
     }
   },
   created () {
