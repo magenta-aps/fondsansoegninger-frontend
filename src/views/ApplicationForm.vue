@@ -231,7 +231,10 @@ export default {
           else { // if the content of the field in question is an object, loop over its entries and construct a new object
             // caveat: Date has no .entries() (it's an empty array), so we need to treat Date as special case because it inherits from Object
             if (this.isDate(field_value)) {
-              field.content = field_value.toISOString()
+              let day = field_value.getDate()
+              let month = field_value.getMonth() + 1 // months are 0-indexed, but January is the 1st month
+              let year = field_value.getFullYear()
+              field.content = year + '-' + this.pad(month, 2, 0) + '-' + this.pad(day, 2, 0)
             }
             else {
               field.content = {}
@@ -280,6 +283,10 @@ export default {
 
     isDate(date) {
       return date instanceof Date
+    },
+
+    pad (n, width, z) {
+      return (String(z).repeat(width) + String(n)).slice(String(n).length)
     },
 
     checkTranslation(key) {
