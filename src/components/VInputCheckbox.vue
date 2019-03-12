@@ -19,7 +19,6 @@
             type="checkbox"
             v-validate="validate"
             :data-vv-as="label"
-            :checked="shouldBeChecked"
             @change="updateInput"
             v-model="internalValue"
           >

@@ -17,3 +17,8 @@ $govuk-text-colour: map-get($danva-colors, "black");
 $govuk-focus-text-colour: map-get($danva-colors, "black");
 $govuk-input-border-colour: map-get($danva-colors, "black");
 $govuk-body-background-colour: map-get($danva-colors, "white");
+
+// Overrides for govuk font
+$govuk-font-family: "Arial", sans-serif;
+$govuk-font-family-tabular: "Arial", sans-serif;
+$govuk-font-family-print: "Arial", sans-serif;

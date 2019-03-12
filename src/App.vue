@@ -51,5 +51,6 @@ body {
 
 .govuk-header__logotype img {
   width: 260px;
+  height: 100%;
 }
 </style>
