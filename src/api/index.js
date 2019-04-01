@@ -7,7 +7,7 @@ export default {
     const url = `${BASE_URL}`
     return axios.post(url, formData, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'multipart/form-data'
       }
     })
       .then(response => {

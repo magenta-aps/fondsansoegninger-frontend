@@ -148,6 +148,69 @@ export default {
       return Object.keys(this.fields).every(field => {
         return this.fields[field] && this.fields[field].valid
       })
+    },
+    /**
+     * Convert the application object to block format
+     */
+    parsedApplication () {
+      // construct FormData with file fields and JSON
+      // (we can't transfer files as application/json,
+      // so we need to use multipart/form-data and append
+      // the JSON).
+
+      let formData = new FormData()
+
+      // this is the JSON part of the FormData
+      let app = {
+        blocks: []
+      }
+      Object.keys(this.application).forEach(section_key => {
+        let block = {
+          label: section_key,
+          display_name: this.checkTranslation(section_key),
+          fields: []
+        }
+        Object.entries(this.application[section_key]).forEach(([field_key, field_value]) => {
+          let field = {
+            label: field_key,
+            display_name: this.checkTranslation(field_key)
+          }
+          const valueIsObject = typeof field_value === 'object' && field_value !== null
+          if (!valueIsObject) { // Date inherits from Object, so valueIsObject will never be false for Date
+            field.content = field_value
+          }
+          else { // if the content of the field in question is an object, loop over its entries and construct a new object
+            // caveat: Date has no .entries() (it's an empty array), so we need to treat Date as special case because it inherits from Object
+            if (this.isDate(field_value)) {
+              let day = field_value.getDate()
+              let month = field_value.getMonth() + 1 // months are 0-indexed, but January is the 1st month
+              let year = field_value.getFullYear()
+              field.content = year + '-' + this.pad(month, 2, 0) + '-' + this.pad(day, 2, 0)
+            }
+            else if (field_value instanceof File) {
+              // if the content of the field is a file, append that file to
+              // the formData instead of adding it to the JSON structure
+              formData.append(field_key, field_value, field_value.name)
+              field.content = field_key
+            }
+            else {
+              field.content = {}
+              Object.entries(field_value).forEach(([prop_key, prop_value]) => {
+                field.content[prop_key] = {
+                  value: prop_value,
+                  display_name: this.checkTranslation(prop_key)
+                }
+              })
+            }
+          }
+          block.fields.push(field)
+        })
+        app.blocks.push(block)
+      })
+
+      // add the constructed JSON to the formdata
+      formData.append('applicationJson', JSON.stringify(app))
+      return formData
     }
   },
   methods: {
