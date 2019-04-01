@@ -1,0 +1,9 @@
+.govuk-radios,
+.govuk-checkboxes {
+  &__input + &__label::before {
+    background-color:#fff;
+  }
+}
+.file-upload input.upload {
+  bottom:0;
+}

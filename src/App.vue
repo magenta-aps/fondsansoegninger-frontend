@@ -25,6 +25,7 @@ export default {
 <style lang="scss">
 @import "./assets/scss/sparnord/vars.scss";
 @import "./assets/govuk-frontend/src/all.scss";
+@import "./assets/scss/overrides.scss";
 body {
   margin: 0;
   padding: 0;
