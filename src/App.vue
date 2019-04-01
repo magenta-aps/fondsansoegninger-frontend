@@ -23,7 +23,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "./assets/scss/danva/vars.scss";
+@import "./assets/scss/sparnord/vars.scss";
 @import "./assets/govuk-frontend/src/all.scss";
 body {
   margin: 0;
@@ -41,9 +41,9 @@ body {
 }
 .govuk-header {
   background: transparent !important;
-  border-bottom-color: map-get($danva-colors, "white");
+  border-bottom-color: mix(map-get($sparnord-colors, "warm-black"), #fff, 10%); // body background color inside vars.scss
   &__container {
-    border-bottom-color: map-get($danva-colors, "dark-blue");
+    border-bottom-color: map-get($sparnord-colors, "sparnord-red");
     border-bottom-width:10px;
   }
 }
