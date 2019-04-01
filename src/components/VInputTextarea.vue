@@ -20,7 +20,7 @@
       >
       </textarea>
     </div>
-    <span class="govuk-hint govuk-character-count__message">
+    <span class="govuk-hint govuk-character-count__message" v-if="maxWordCount">
       Du har {{maxWordCount - wordCount}} ord tilbage.
     </span>
   </div>

@@ -1,3 +1,5 @@
+// THIS FILE CANNOT OUTPUT CSS RULES, AS IT IS IMPORTED IN MULTIPLE LOCATIONS
+
 $sparnord-colors: (
   "fresh-red": #e4003f,
   "sparnord-red": #bc2b30,
@@ -31,6 +33,6 @@ $govuk-input-border-colour: map-get($sparnord-colors, "warm-black");
 $govuk-body-background-colour: mix(map-get($sparnord-colors, "warm-black"), #fff, 10%);
 
 // Overrides for govuk font
-$govuk-font-family: "Arial", sans-serif;
-$govuk-font-family-tabular: "Arial", sans-serif;
-$govuk-font-family-print: "Arial", sans-serif;
+$govuk-font-family: "Gilroy-Medium", "Arial", sans-serif;
+$govuk-font-family-tabular: "Gilroy-Medium", "Arial", sans-serif;
+$govuk-font-family-print: "Gilroy-Medium", "Arial", sans-serif;

@@ -20,6 +20,9 @@
       :maxlength="maxLength"
       v-model="internalValue"
     >
+    <span class="govuk-hint govuk-character-count__message" v-if="maxWordCount">
+      Du har {{maxWordCount - wordCount}} ord tilbage.
+    </span>
   </div>
 </template>
 
@@ -58,6 +61,26 @@ export default {
         if (count != null) break
       }
       return count
+    },
+    maxWordCount () {
+      const wcKey = 'word_limit'
+      let count = null
+      let rules = this.validate.split('|')
+
+      for (var i = 0; i < rules.length; i++) {
+        if (rules[i].includes(wcKey)) {
+          count = rules[i].split(':')[1]
+          break
+        }
+      }
+      return count
+    },
+    wordCount () {
+      if (this.internalValue != null) {
+        let list = this.internalValue.split(' ')
+        return list[list.length - 1] === '' ? list.length - 1 : list.length
+      }
+      return 0
     }
   }
 }

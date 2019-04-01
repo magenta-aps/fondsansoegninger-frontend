@@ -12,7 +12,7 @@ import './vee'
 Vue.config.productionTip = false
 
 const currencyConfig = {
-  symbol: 'kr',
+  symbol: 'Kr.',
   thousandsSeparator: '.',
   fractionCount: 0,
   fractionSeparator: ',',

@@ -9,8 +9,7 @@
       {{ errors.first(identifier) }}
     </span>
     <div>
-      <div class="file-upload govuk-button">
-        <v-icon name="cloud-upload-alt" scale="2"/>
+      <span class="file-upload">
         <input
           type="file"
           class="upload"
@@ -22,7 +21,8 @@
           :data-vv-as="label"
           @change="onChange($event)"
         />
-      </div>
+        <v-icon name="file-alt" scale="1.75"/>
+      </span>
       <span class="govuk-body govuk-!-padding-left-2">
         <span v-if="!fileName">Tilføj din fil</span>
         <span v-else><i>{{fileName}}</i></span>
@@ -49,7 +49,7 @@ export default {
   methods: {
     onChange (event) {
       let file = event.target.files[0]
-      this.fileName = file.name
+      this.fileName = file ? file.name : null
       this.$emit('input', file)
     }
   }
@@ -58,32 +58,41 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import "@/assets/scss/sparnord/vars.scss";
+
 .govuk-body {
   line-height: 48px;
 }
 
-.govuk-button {
-  background-color: #023671;
-
-  &:hover {
-    background-color: lighten(#023671, 10%)
-  }
-}
-
 .file-upload {
-    position: relative;
-    overflow: hidden;
-
+  position: relative;
+  overflow: hidden;
+  display:inline-block;
+  vertical-align:text-bottom;
   input.upload {
     position: absolute;
     top: 0;
     right: 0;
+    bottom:0;
+    left:0;
+    width:100%;
     margin: 0;
     padding: 0;
     font-size: 20px;
-    cursor: pointer;
+    z-index:1;
     opacity: 0;
     filter: alpha(opacity=0);
+    cursor: pointer;
+  }
+  .fa-icon {
+    z-index:0;
+    display:block;
+    color: map-get($sparnord-colors, "fresh-red");
+    cursor: pointer;
+  }
+  input.upload:focus + .fa-icon,
+  input.upload:hover + .fa-icon {
+    color: mix(map-get($sparnord-colors, "fresh-red"), #fff, 60%);
   }
 }
 
