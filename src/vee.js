@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { Validator, install as VeeValidate } from 'vee-validate/dist/vee-validate.minimal.esm.js'
-import { required, max, digits, email, size, numeric, max_value } from 'vee-validate/dist/rules.esm.js'
+import { required, max, digits, email, size, numeric, max_value, date_format, after, before } from 'vee-validate/dist/rules.esm.js'
 import veeDa from 'vee-validate/dist/locale/da'
 import WordLimit from './validators/WordLimit'
 import Cvr from './validators/Cvr'
@@ -20,6 +20,9 @@ Validator.extend('email', email)
 Validator.extend('size', size)
 Validator.extend('numeric', numeric)
 Validator.extend('max_value', max_value)
+Validator.extend('date_format', date_format)
+Validator.extend('after', after)
+Validator.extend('before', before)
 Validator.extend('word_limit', WordLimit)
 Validator.extend('cvr', Cvr)
 

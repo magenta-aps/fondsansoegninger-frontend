@@ -1,11 +1,15 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:3000/service'
+const BASE_URL = process.env.VUE_APP_API_ENDPOINT
 
 export default {
-  async apply (formData) {
-    const url = `${BASE_URL}/submit`
-    return axios.post(url, formData)
+  sendApplication (formData) {
+    const url = `${BASE_URL}`
+    return axios.post(url, formData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => {
         console.log(response)
         return response.data

@@ -3,9 +3,8 @@
     <label v-if="hasLabel" class="govuk-label" :for="identifier">
       {{label}}
     </label>
-    <span v-if="hasHint" class="govuk-hint">
-      {{hint}}
-    </span>
+    <div v-if="hasHint" class="govuk-hint" v-html="hint">
+    </div>
     <span v-show="errors.has(identifier)" class="govuk-error-message">
       {{ errors.first(identifier) }}
     </span>
@@ -45,7 +44,7 @@ export default {
       return this.value
     },
     validationRules () {
-      let rules = 'numeric|max_value:99999999999'
+      let rules = 'numeric'
       let extraRules = this.validate ? this.validate + '|' : ''
       return extraRules + rules
     },

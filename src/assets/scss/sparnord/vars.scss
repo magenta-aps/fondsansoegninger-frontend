@@ -28,4 +28,9 @@ $govuk-error-colour: map-get($sparnord-colors, "fresh-red");
 $govuk-text-colour: map-get($sparnord-colors, "warm-black");
 $govuk-focus-text-colour: map-get($sparnord-colors, "warm-black");
 $govuk-input-border-colour: map-get($sparnord-colors, "warm-black");
-$govuk-body-background-colour: mix(map-get($sparnord-colors, "warm-black"), #fff, 10%)
+$govuk-body-background-colour: mix(map-get($sparnord-colors, "warm-black"), #fff, 10%);
+
+// Overrides for govuk font
+$govuk-font-family: "Arial", sans-serif;
+$govuk-font-family-tabular: "Arial", sans-serif;
+$govuk-font-family-print: "Arial", sans-serif;

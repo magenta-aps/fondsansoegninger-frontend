@@ -23,29 +23,32 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "./assets/scss/sparnord/vars.scss";
+@import "./assets/scss/danva/vars.scss";
 @import "./assets/govuk-frontend/src/all.scss";
-
 body {
   margin: 0;
   padding: 0;
 }
-
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
 .govuk-header {
   background: transparent !important;
-  border-bottom-color: mix(map-get($sparnord-colors, "warm-black"), #fff, 10%); // body background color inside vars.scss
+  border-bottom-color: map-get($danva-colors, "white");
   &__container {
-    border-bottom-color: map-get($sparnord-colors, "sparnord-red");
-    border-bottom-width:5px;
+    border-bottom-color: map-get($danva-colors, "dark-blue");
+    border-bottom-width:10px;
   }
 }
-
 .govuk-header__logotype img {
-  width: 200px;
-}
-
-.govuk-radios__input + .govuk-radios__label::before,
-.govuk-checkboxes__input + .govuk-checkboxes__label::before {
-  background:#fff;
+  width: 260px;
+  height: 100%;
 }
 </style>
